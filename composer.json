@@ -1,0 +1,41 @@
+{
+    "name": "octava/symfony-json-schema-form",
+    "description": "Clone of limenius/liform. Symfony json schema form is a library for serializing Symfony Forms into JSON schema.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Octava\\SymfonyJsonSchemaForm\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Octava\\SymfonyJsonSchemaForm\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "The Rat",
+            "email": "theratg@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4.16|^8.1.0",
+        "symfony/form": "^4.4|^5.4",
+        "symfony/translation": "^4.4|^5.0",
+        "symfony/serializer": "^4.4|^5.0",
+        "symfony/contracts": "^1.0|^2.1",
+        "symfony/validator": "^5.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "phpunit/phpunit": "^9.5",
+        "phpro/grumphp": "^1.12"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
+    }
+}
