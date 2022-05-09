@@ -9,7 +9,6 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 return $config->setRules([
     '@Symfony' => true,
-    '@PHPCompatibility' => true,
     'array_syntax' => ['syntax' => 'short'],
     'multi_line_extends_each_single_line' => true,
     'trailing_comma_in_multiline_array' => true,

@@ -11,7 +11,7 @@ abstract class AbstractTransformer implements TransformerInterface
 {
     protected TranslatorInterface $translator;
 
-    protected FormTypeGuesserInterface $validatorGuesser;
+    protected ?FormTypeGuesserInterface $validatorGuesser = null;
 
     public function __construct(TranslatorInterface $translator, ?FormTypeGuesserInterface $validatorGuesser = null)
     {

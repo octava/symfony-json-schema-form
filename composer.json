@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Octava\\SymfonyJsonSchemaForm\\": "src/"
+            "Octava\\SymfonyJsonSchemaForm\\": "src/",
+            "Octava\\SymfonyJsonSchemaBundle\\": "bundle/"
         }
     },
     "autoload-dev": {
@@ -26,16 +27,19 @@
         "symfony/translation": "^4.4|^5.0",
         "symfony/serializer": "^4.4|^5.0",
         "symfony/contracts": "^1.0|^2.1",
-        "symfony/validator": "^5.4"
+        "symfony/validator": "^4.4|^5.4",
+        "symfony/http-kernel": "^4.4|^5.4"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.8",
         "phpunit/phpunit": "^9.5",
-        "phpro/grumphp": "^1.12"
+        "phpro/grumphp": "^1.12",
+        "escapestudios/symfony2-coding-standard": "^3.12",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2"
     },
     "config": {
         "allow-plugins": {
-            "phpro/grumphp": true
+            "phpro/grumphp": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }
