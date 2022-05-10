@@ -2,6 +2,7 @@
 
 use Octava\SymfonyJsonSchemaForm\Transformer\AbstractTransformer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services()
@@ -25,7 +26,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Serializer\Normalizer\FormErrorNormalizer::class)
-        ->arg('$service', \Symfony\Contracts\Translation\TranslatorInterface::class)
+        ->arg('$service', ref(\Symfony\Contracts\Translation\TranslatorInterface::class))
         ->tag('serializer.normalizer', ['priority' => -10]);
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Serializer\Normalizer\FormErrorNormalizer::class)
@@ -33,31 +34,39 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Serializer\Normalizer\InitialValuesNormalizer::class)
         ->tag('serializer.normalizer', ['priority' => -10]);
+
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Resolver::class);
     $services
-        ->set(\Octava\SymfonyJsonSchemaForm\SJSForm::class);
+        ->alias('sjsform.resolver', \Octava\SymfonyJsonSchemaForm\Resolver::class);
+
+    $services
+        ->set(\Octava\SymfonyJsonSchemaForm\SJSForm::class)
+        ->arg('$resolver', ref(\Octava\SymfonyJsonSchemaForm\Resolver::class));
+
+    $services
+        ->alias('sjsform', \Octava\SymfonyJsonSchemaForm\SJSForm::class);
 
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Guesser\ValidatorGuesser::class)
-        ->arg('$metadataFactory', 'validator.mapping.class_metadata_factory');
+        ->arg('$metadataFactory', ref('validator.mapping.class_metadata_factory'));
 
     $services
         ->set(AbstractTransformer::class)
         ->abstract()
-        ->arg('$translator', \Symfony\Contracts\Translation\TranslatorInterface::class)
-        ->arg('$validatorGuesser', \Octava\SymfonyJsonSchemaForm\Guesser\ValidatorGuesser::class);
+        ->arg('$translator', ref(\Symfony\Contracts\Translation\TranslatorInterface::class))
+        ->arg('$validatorGuesser', ref(\Octava\SymfonyJsonSchemaForm\Guesser\ValidatorGuesser::class));
 
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Transformer\IntegerTransformer::class)
         ->tag('sjsform.transformer', ['form_type' => 'integer']);
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Transformer\ArrayTransformer::class)
-        ->arg('$resolver', \Octava\SymfonyJsonSchemaForm\Resolver::class)
+        ->arg('$resolver', ref(\Octava\SymfonyJsonSchemaForm\Resolver::class))
         ->tag('sjsform.transformer', ['form_type' => 'collection']);
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Transformer\CompoundTransformer::class)
-        ->arg('$resolver', \Octava\SymfonyJsonSchemaForm\Resolver::class)
+        ->arg('$resolver', ref(\Octava\SymfonyJsonSchemaForm\Resolver::class))
         ->tag('sjsform.transformer', ['form_type' => 'compound']);
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Transformer\ChoiceTransformer::class)
@@ -79,4 +88,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Transformer\BooleanTransformer::class)
         ->tag('sjsform.transformer', ['form_type' => 'checkbox', 'widget' => 'checkbox']);
+    $services
+        ->set(\Octava\SymfonyJsonSchemaForm\Transformer\SubmitTransformer::class)
+        ->tag('sjsform.transformer', ['form_type' => 'submit']);
 };
