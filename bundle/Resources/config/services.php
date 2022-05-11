@@ -91,4 +91,10 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set(\Octava\SymfonyJsonSchemaForm\Transformer\SubmitTransformer::class)
         ->tag('sjsform.transformer', ['form_type' => 'submit']);
+    $services
+        ->set(\Octava\SymfonyJsonSchemaForm\Transformer\ButtonTransformer::class)
+        ->tag('sjsform.transformer', ['form_type' => 'button']);
+    $services
+        ->set(\Octava\SymfonyJsonSchemaForm\Transformer\ButtonTransformer::class)
+        ->tag('sjsform.transformer', ['form_type' => 'default', 'widget' => 'default']);
 };

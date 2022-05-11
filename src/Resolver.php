@@ -36,11 +36,6 @@ class Resolver implements ResolverInterface
             ];
         }
 
-        throw new TransformerException(
-            sprintf(
-                'Could not find a transformer for any of these types (%s)',
-                implode(', ', $types)
-            )
-        );
+        return $this->transformers['default'];
     }
 }
