@@ -22,7 +22,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.4.16|^8.1.0",
+        "php": ">7.4.16",
         "symfony/form": "^5.4|^6.4",
         "symfony/translation": "^5.0|^6.4",
         "symfony/serializer": "^5.0|^6.4",
