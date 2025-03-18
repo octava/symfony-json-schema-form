@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
 {
-    public function testRequired()
+    public function testRequired(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -24,13 +24,12 @@ class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
 
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('required', $transformed);
         $this->assertTrue(is_array($transformed['required']));
         $this->assertContains('firstName', $transformed['required']);
     }
 
-    public function testDescription()
+    public function testDescription(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -52,12 +51,11 @@ class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
 
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('description', $transformed['properties']['firstName']);
         $this->assertSame($description, $transformed['properties']['firstName']['description']);
     }
 
-    public function testDescriptionFromFormHelp()
+    public function testDescriptionFromFormHelp(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -81,12 +79,11 @@ class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
 
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('description', $transformed['properties']['firstName']);
         $this->assertSame($description, $transformed['properties']['firstName']['description']);
     }
 
-    public function testDescriptionFromFormHelpOverriddenByLiformDescription()
+    public function testDescriptionFromFormHelpOverriddenByLiformDescription(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -113,12 +110,11 @@ class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
             );
         $transformed = $transformer->transform($form);
 
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('description', $transformed['properties']['firstName']);
         $this->assertSame($description, $transformed['properties']['firstName']['description']);
     }
 
-    public function testLabel()
+    public function testLabel(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -135,12 +131,11 @@ class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
 
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('title', $transformed['properties']['firstName']);
         $this->assertEquals('a label', $transformed['properties']['firstName']['title']);
     }
 
-    public function testWidget()
+    public function testWidget(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -153,11 +148,10 @@ class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
 
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('widget', $transformed['properties']['firstName']);
     }
 
-    public function testWidgetViaTransformerDefinition()
+    public function testWidgetViaTransformerDefinition(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -169,7 +163,6 @@ class CommonTransformerTest extends SymfonyJsonSchemaFormTestCase
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
 
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('widget', $transformed['properties']['firstName']);
     }
 }

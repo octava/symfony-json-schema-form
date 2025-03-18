@@ -41,9 +41,8 @@ abstract class AbstractTransformer implements TransformerInterface
         $schema = $this->addPattern($form, $schema);
         $schema = $this->addDescription($form, $schema);
         $schema = $this->addWidget($form, $schema, $widget);
-        $schema = $this->applyExtensions($extensions, $form, $schema);
 
-        return $schema;
+        return $this->applyExtensions($extensions, $form, $schema);
     }
 
     protected function addPattern(FormInterface $form, array $schema): array

@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class NumberTransformerTest extends SymfonyJsonSchemaFormTestCase
 {
-    public function testPattern()
+    public function testPattern(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -23,7 +23,6 @@ class NumberTransformerTest extends SymfonyJsonSchemaFormTestCase
         $resolver->setTransformer('number', new NumberTransformer($this->translator));
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
         $this->assertEquals('number', $transformed['properties']['somefield']['type']);
         $this->assertEquals('widget', $transformed['properties']['somefield']['widget']);
     }

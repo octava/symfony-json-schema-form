@@ -4,14 +4,14 @@ namespace Octava\SymfonyJsonSchemaForm\Tests\Transformer;
 
 use Octava\SymfonyJsonSchemaForm\Resolver;
 use Octava\SymfonyJsonSchemaForm\Tests\SymfonyJsonSchemaFormTestCase;
-use Octava\SymfonyJsonSchemaForm\Transformer\CompoundTransformer;
 use Octava\SymfonyJsonSchemaForm\Transformer;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Octava\SymfonyJsonSchemaForm\Transformer\CompoundTransformer;
 use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
 {
-    public function testChoice()
+    public function testChoice(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -28,7 +28,7 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
             ->will(
                 $this->returnCallback(
                     function ($str) {
-                        return $str.'-translated';
+                        return $str . '-translated';
                     }
                 )
             );
@@ -37,7 +37,6 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
         $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('enum_titles', $transformed['properties']['firstName']);
         $this->assertArrayHasKey('enum_titles', $transformed['properties']['firstName']['options']);
         $this->assertEquals(['a-translated', 'b-translated'], $transformed['properties']['firstName']['enum_titles']);
@@ -49,7 +48,7 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
         $this->assertEquals(['A', 'B'], $transformed['properties']['firstName']['enum']);
     }
 
-    public function testChoiceExpanded()
+    public function testChoiceExpanded(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -67,7 +66,7 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
             ->will(
                 $this->returnCallback(
                     function ($str) {
-                        return $str.'-translated';
+                        return $str . '-translated';
                     }
                 )
             );
@@ -76,7 +75,6 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
         $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('enum_titles', $transformed['properties']['firstName']);
         $this->assertArrayHasKey('enum_titles', $transformed['properties']['firstName']['options']);
         $this->assertEquals(['a-translated', 'b-translated'], $transformed['properties']['firstName']['enum_titles']);
@@ -90,7 +88,7 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
         $this->assertEquals('choice-expanded', $transformed['properties']['firstName']['widget']);
     }
 
-    public function testChoiceMultiple()
+    public function testChoiceMultiple(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -106,13 +104,12 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
         $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('items', $transformed['properties']['firstName']);
         $this->assertEquals('array', $transformed['properties']['firstName']['type']);
         $this->assertArrayNotHasKey('widget', $transformed['properties']['firstName']);
     }
 
-    public function testChoiceMultipleExpanded()
+    public function testChoiceMultipleExpanded(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
@@ -129,7 +126,6 @@ class ChoiceTransformerTest extends SymfonyJsonSchemaFormTestCase
         $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
         $this->assertArrayHasKey('items', $transformed['properties']['firstName']);
         $this->assertEquals('array', $transformed['properties']['firstName']['type']);
         $this->assertArrayHasKey('widget', $transformed['properties']['firstName']);

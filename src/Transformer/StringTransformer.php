@@ -67,6 +67,7 @@ class StringTransformer extends AbstractTransformer
         if ($minLength) {
             $schema['minLength'] = $minLength;
         }
+
         return $schema;
     }
 }

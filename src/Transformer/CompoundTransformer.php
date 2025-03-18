@@ -14,7 +14,7 @@ class CompoundTransformer extends AbstractTransformer
     public function __construct(
         TranslatorInterface $translator,
         ?FormTypeGuesserInterface $validatorGuesser = null,
-        ?ResolverInterface $resolver = null
+        ?ResolverInterface $resolver = null,
     ) {
         parent::__construct($translator, $validatorGuesser);
         $this->resolver = $resolver;
@@ -32,7 +32,7 @@ class CompoundTransformer extends AbstractTransformer
                 $transformerData['widget']);
             $transformedChild['propertyOrder'] = $order;
             $data[$name] = $transformedChild;
-            $order++;
+            ++$order;
 
             if ($transformerData['transformer']->isRequired($field)) {
                 $required[] = $field->getName();

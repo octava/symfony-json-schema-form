@@ -11,9 +11,6 @@ class FormErrorNormalizer implements NormalizerInterface
 {
     private TranslatorInterface $translator;
 
-    /**
-     * @param TranslatorInterface $translator
-     */
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;

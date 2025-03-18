@@ -2,7 +2,6 @@
 
 namespace Octava\SymfonyJsonSchemaForm;
 
-use Octava\SymfonyJsonSchemaForm\Exception\TransformerException;
 use Octava\SymfonyJsonSchemaForm\Transformer\TransformerInterface;
 use Symfony\Component\Form\FormInterface;
 

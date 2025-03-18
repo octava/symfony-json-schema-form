@@ -24,8 +24,8 @@ class InitialValuesNormalizer implements NormalizerInterface
     private function getValues(Form $form, FormView $formView)
     {
         if (!empty($formView->children)) {
-            if (in_array('choice', FormUtil::typeAncestry($form)) &&
-                $formView->vars['expanded']
+            if (in_array('choice', FormUtil::typeAncestry($form))
+                && $formView->vars['expanded']
             ) {
                 if ($formView->vars['multiple']) {
                     return $this->normalizeMultipleExpandedChoice($formView);
@@ -34,7 +34,7 @@ class InitialValuesNormalizer implements NormalizerInterface
                 }
             }
             // Force serialization as {} instead of []
-            $data = (object)[];
+            $data = (object) [];
             foreach ($formView->children as $name => $child) {
                 // Avoid unknown field error when csrf_protection is true
                 // CSRF token should be extracted another way
@@ -43,7 +43,7 @@ class InitialValuesNormalizer implements NormalizerInterface
                 }
             }
 
-            return (array)$data;
+            return (array) $data;
         } else {
             // handle separatedly the case with checkboxes, so the result is
             // true/false instead of 1/0

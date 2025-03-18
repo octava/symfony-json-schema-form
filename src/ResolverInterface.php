@@ -8,5 +8,6 @@ use Symfony\Component\Form\FormInterface;
 interface ResolverInterface
 {
     public function setTransformer($formType, TransformerInterface $transformer, $widget = null): void;
+
     public function resolve(FormInterface $form);
 }

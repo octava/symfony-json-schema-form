@@ -22,7 +22,7 @@ class InitialValuesNormalizerTest extends SymfonyJsonSchemaFormTestCase
             ->add('firstName', TextType::class)
             ->add('secondName', TextType::class);
         $normalizer = new InitialValuesNormalizer();
-        $data = (array)$normalizer->normalize($form);
+        $data = (array) $normalizer->normalize($form);
         $this->assertEquals('Joe', $data['firstName']);
     }
 
@@ -40,9 +40,8 @@ class InitialValuesNormalizerTest extends SymfonyJsonSchemaFormTestCase
             );
 
         $normalizer = new InitialValuesNormalizer();
-        $data = (array)$normalizer->normalize($form);
+        $data = (array) $normalizer->normalize($form);
         $this->assertEquals(['A'], $data['firstName']);
-
     }
 
     public function testChoiceExpanded(): void
@@ -58,8 +57,7 @@ class InitialValuesNormalizerTest extends SymfonyJsonSchemaFormTestCase
             );
 
         $normalizer = new InitialValuesNormalizer();
-        $data = (array)$normalizer->normalize($form);
+        $data = (array) $normalizer->normalize($form);
         $this->assertEquals('A', $data['firstName']);
-
     }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CompoundTransformerTest extends SymfonyJsonSchemaFormTestCase
 {
-    public function testOrder()
+    public function testOrder(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add('firstName', TextType::class)
@@ -20,7 +20,6 @@ class CompoundTransformerTest extends SymfonyJsonSchemaFormTestCase
         $resolver->setTransformer('text', new StringTransformer($this->translator));
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
         $this->assertEquals(1, $transformed['properties']['firstName']['propertyOrder']);
         $this->assertEquals(2, $transformed['properties']['secondName']['propertyOrder']);
     }

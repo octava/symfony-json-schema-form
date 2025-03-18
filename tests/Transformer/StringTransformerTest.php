@@ -11,19 +11,18 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class StringTransformerTest extends SymfonyJsonSchemaFormTestCase
 {
-    public function testPattern()
+    public function testPattern(): void
     {
         $form = $this->factory->create(FormType::class)
             ->add(
                 'firstName',
                 TextType::class,
-                ['attr' => ['pattern' => '.{5,}' ]]
+                ['attr' => ['pattern' => '.{5,}']]
             );
         $resolver = new Resolver();
         $resolver->setTransformer('text', new StringTransformer($this->translator));
         $transformer = new CompoundTransformer($this->translator, null, $resolver);
         $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
         $this->assertEquals('.{5,}', $transformed['properties']['firstName']['pattern']);
     }
 }

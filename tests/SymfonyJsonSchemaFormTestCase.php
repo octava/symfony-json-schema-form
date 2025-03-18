@@ -3,6 +3,7 @@
 namespace Octava\SymfonyJsonSchemaForm\Tests;
 
 use Octava\SymfonyJsonSchemaForm\Form\Extension\AddSymfonyJsonSchemaFormExtension;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Forms;
@@ -12,6 +13,9 @@ class SymfonyJsonSchemaFormTestCase extends TestCase
 {
     protected ?FormFactoryInterface $factory = null;
 
+    /**
+     * @var TranslatorInterface&MockObject|null
+     */
     protected ?TranslatorInterface $translator = null;
 
     protected function setUp(): void

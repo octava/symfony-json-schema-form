@@ -24,25 +24,12 @@ class TransformerCompilerPass implements CompilerPassInterface
             $transformer = $container->getDefinition($id);
 
             if (!isset(class_implements($transformer->getClass())[TransformerInterface::class])) {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        "The service %s was tagged as a '%s' but does not implement the mandatory %s",
-                        $id,
-                        self::TRANSFORMER_TAG,
-                        TransformerInterface::class
-                    )
-                );
+                throw new \InvalidArgumentException(sprintf("The service %s was tagged as a '%s' but does not implement the mandatory %s", $id, self::TRANSFORMER_TAG, TransformerInterface::class));
             }
 
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['form_type'])) {
-                    throw new \InvalidArgumentException(
-                        sprintf(
-                            "The service %s was tagged as a '%s' but does not specify the mandatory 'form_type' option.",
-                            $id,
-                            self::TRANSFORMER_TAG
-                        )
-                    );
+                    throw new \InvalidArgumentException(sprintf("The service %s was tagged as a '%s' but does not specify the mandatory 'form_type' option.", $id, self::TRANSFORMER_TAG));
                 }
 
                 $widget = null;

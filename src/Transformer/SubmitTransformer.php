@@ -1,6 +1,7 @@
 <?php
 
 namespace Octava\SymfonyJsonSchemaForm\Transformer;
+
 use Symfony\Component\Form\FormInterface;
 
 class SubmitTransformer extends AbstractTransformer

@@ -32,7 +32,7 @@ class ValidatorGuesser extends ValidatorTypeGuesser
                 break;
             case Constraints\Range::class:
                 if (is_numeric($constraint->min)) {
-                    return new ValueGuess(strlen((string)$constraint->min), Guess::LOW_CONFIDENCE);
+                    return new ValueGuess(strlen((string) $constraint->min), Guess::LOW_CONFIDENCE);
                 }
                 break;
         }
